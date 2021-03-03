@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AVIATUR</title>
+    <style>
+    *{
+        margin: 0;
+        padding:0;
+    }
+    body{
+        
+
+    }
+    h1{
+            width: 100%;
+            background-color: #0665B3;
+            color: white;
+        }
+        .po{
+
+            width: 100%;
+            height: auto;
+            display:inline-block;
+            background-color:teal;
+        }
+        .posicion-secundaria{
+            width: 18%;
+                height: 700px;
+                background-color: #ECECEC;
+                display:inline-table;
+        }
+        .posicion-ejemplo{
+            width: 18%;
+                height: 700px;
+                background-color: #ECECEC;
+                display:inline-table;
+        }
+
+        .posicion-principal{
+                width: 75%;
+                height: 240px;
+                background-color: #ECECEC;
+                display:inline-block;
+        }
+     
+      .posicion{
+        width: 20%;
+                height: 180px;
+                display:inline-block;
+             
+      }
+        .posicion-izquierda{
+            width: 20%;
+                height: 210px;
+                display:inline-block;
+                background-color: white;
+        }
+
+        .posicion-siguiente{
+            width: 20%;
+            height: 210px;
+            background-color: white;
+            display:inline-block;
+        
+        }
+
+        .precio{
+            width: 100%;
+            color: orange;
+
+       }
+
+       .precio p{
+           display: inline-table;
+       }
+
+        @media screen and (max-width: 600px) {
+            h1 img{
+            width: 100%;
+            background-color:#0665B3;
+            width: 200px;
+            margin-left: 150px;
+            }
+        }
+
+      
+
+    </style>
+</head>
+<body>
+    <h1><img src="assets/images/logo-aviatur.svg" width="200" style="padding: 8px;"></h1>
+  <div class="po">
+<div class="posicion-secundaria"><p style="padding: 8px;"><font size="4" style="color: gray;">Filtros</font></p><br>
+   <form action= GET> <img src="assets/icons/filters/search.svg" width="20"><input type="search" placeholder="Nombre del Hotel"></form><br><br>
+<input type="search" placeholder="Hotel"><br><br><br><br>
+<p></p><img src="assets/icons/filters/star.svg" width="20">Estrellas</p><br>
+<input type="checkbox"><img src="assets/icons/filters/star.svg" width="20"><br>
+<input type="checkbox"><img src="assets/icons/filters/star.svg" width="20"><img src="assets/icons/filters/star.svg" width="20"><br>
+<input type="checkbox"><img src="assets/icons/filters/star.svg" width="20"><img src="assets/icons/filters/star.svg" width="20"><img src="assets/icons/filters/star.svg" width="20"><br>
+<input type="checkbox"><img src="assets/icons/filters/star.svg" width="20"><img src="assets/icons/filters/star.svg" width="20"><img src="assets/icons/filters/star.svg" width="20"><img src="assets/icons/filters/star.svg" width="20"><br>
+<input type="checkbox"><img src="assets/icons/filters/star.svg" width="20"><img src="assets/icons/filters/star.svg" width="20"><img src="assets/icons/filters/star.svg" width="20"><img src="assets/icons/filters/star.svg" width="20"><img src="assets/icons/filters/star.svg" width="20">
+</div>
+
+    <ul id="Hoteles"></ul>
+        <script>
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            var respuesta = JSON.parse(xhttp.responseText);
+            var Hoteles = respuesta.Hoteles;
+           
+            var salida = '';
+             
+
+             for(var i = 0; i < Hoteles.length; i++){
+              salida += `<div class="posicion-principal"><div class="posicion"><img src="assets/images/hotels/${Hoteles[i].image}" width="200"/></div><div class="posicion-izquierda">${Hoteles[i].name} <br> ${Hoteles[i].stars} <br> ${Hoteles[i].amenities} <br> <img src="assets/icons/amenities/bathrobes.svg" width="20"></div><div class="posicion-siguiente"> <center><p>Precio por noche por habitación </p></center><br><br><div class="precio"><center><p><font size="5" style="color: orange;">ARS &nbsp;</p><strong>${Hoteles[i].price}</strong></center></font></div><br> <center><a href="verhotel.html" style="background-color: blue; color: white; padding:8px; border: 1px solid; margin: 2px; text-decoration: none;">VER HOTEL</a> </center></div></div>`;
+         
+            }
+          document.getElementById('Hoteles').innerHTML = salida;
+            }
+};
+xhttp.open("GET", "data/data.json", true);
+xhttp.send();
+           
+        </script>
+        </div>
+  
+
+</body>
+</html>
